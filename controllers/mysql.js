@@ -90,6 +90,50 @@ let deleteUser = function (userId) {
     let _req = `UPDATE userinfo SET username = '${username}', password = '${password}' WHERE userID = '${userId}' `
     return query(_req)
 }
+
+// 评论
+// 分页查询评论
+let findComment = function (pageIndex, pageSize) {
+    let _req = `SELECT * from commentinfo ORDER BY create_time LIMIT ${(pageIndex - 1) * pageSize}, ${pageSize}`
+    return query(_req)
+ }
+
+  // 删除用户
+let deleteComment = function (commentId) { 
+    let _req = `DELETE from commentinfo WHERE id = '${commentId}'`
+    return query(_req)
+ }
+
+ // 文章
+ // 分页获取文章列表
+ let findArticle = function (pageIndex, pageSize, condition) { 
+    let _req = `SELECT * from essayinfo WHERE essayname LIKE '${condition}%' ORDER BY essaydate LIMIT ${(pageIndex - 1) * pageSize}, ${pageSize}`
+    return query(_req)
+  }
+
+  //  获取文章信息
+ let getArticleInfo = function(essayId) {
+    let _req = `SELECT * from essayinfo WHERE essayID = '${essayId}'`
+    return query(_req)
+}
+
+// 新增文章
+let addArticle = function(essayname, password, essayId, date) {
+    let _req = `INSERT INTO essayinfo VALUES ('${essayname}', '${essayId}', '0', '${password}', '${date}' )`
+    return query(_req)
+}
+
+// 删除文章
+let deleteArticle = function (essayId) { 
+   let _req = `DELETE from essayinfo WHERE essayID = '${essayId}'`
+   return query(_req)
+}
+
+//  修改文章
+let editArticle = function(essayname, essaycontent, essayId) {
+   let _req = `UPDATE essayinfo SET essayname = '${essayname}', essaycontent = '${essaycontent}' WHERE essayID = '${essayId}' `
+   return query(_req)
+}
  module.exports = {
      findAdmin,
      addAdmin,
@@ -100,5 +144,12 @@ let deleteUser = function (userId) {
      findAll,
      getUserInfo,
      deleteUser,
-     editUser
+     editUser,
+     findComment,
+     deleteComment,
+     findArticle,
+     getArticleInfo,
+     addArticle,
+     deleteArticle,
+     editArticle
  }
