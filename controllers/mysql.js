@@ -29,6 +29,12 @@ const query = function (sql, values) {
     })
 }
 
+// 登陆
+let checkLogin = function(username, password) {
+    let _req =  `SELECT * from admininfo where username = ${username}`
+    return query(_req)
+}
+
 // 查询admin表
 let findAdmin = function () { 
     let _req = `SELECT * from admininfo`
@@ -151,5 +157,6 @@ let editArticle = function(essayname, essaycontent, essayId) {
      getArticleInfo,
      addArticle,
      deleteArticle,
-     editArticle
+     editArticle,
+     checkLogin
  }

@@ -3,13 +3,30 @@ const uuid = require('node-uuid')
 
 class UserController {
     async login(ctx, next) {
-        // let res = await service.findAdmin()
-        ctx.body = {
-            status: 0,
-            token: '123',
-            // data: res,
-            msg: '登录成功'
+        let data = ctx.request.body
+        let res = await service.checkLogin(data.username, data.password)
+        if(res.length === 0) {
+            ctx.body = {
+                status: -1,
+                // data: res,
+                msg: '用户名错误'
+            }
+        }else {
+            if(res[0].password == data.password) {
+                ctx.body = {
+                    status: 0,
+                    token: '12g4dg3dfadsf4354354645a',
+                    msg: '登陆成功'
+                } 
+            }else {
+                ctx.body = {
+                    status: -1,
+                    // data: res,
+                    msg: '密码错误'
+                }  
+            }
         }
+
     }
     // 获取管理员账号列表
     async getAccountList(ctx, next) {
