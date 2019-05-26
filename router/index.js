@@ -22,6 +22,10 @@ router
     // 评论模块
     .get('/api/comment/getListByPage', commentctrl.getCommentList)
     .post('/api/comment/delete', commentctrl.deleteComment)
+    .post('/api/comment/sendMessage', commentctrl.sendMessage)
+    .get('/api/comment/getMessage', commentctrl.getMessage)
+    .get('/api/comment/clearAll', commentctrl.clearAll)
+    .post('/api/comment/readMessage', commentctrl.readMessage)
     // 文章模块
     .get('/api/article/getListByPage', articlectrl.getArticleList)
     .post('/api/article/add', articlectrl.addArticle)
